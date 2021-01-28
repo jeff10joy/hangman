@@ -1,0 +1,154 @@
+import random
+import sys
+import time
+
+
+wordlist = ["lion", "umbrella", "window", "computer", "glass", "juice", "chair","laptop", "dog", "cat", "lemon", "cable", "mirror", "hat"]
+
+guess_word = []
+secretWord = random.choice(wordlist)
+length_word = len(secretWord)
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+letter_storage = []
+
+def beginning():
+    print("Hello Mate!\n")
+    while True:
+        name = input("Please enter Your name\n").strip()
+        if name == '':
+            print("You can't do that! No blank lines")
+        else:
+            break
+beginning()
+
+def newFunc():
+    print("H",end='')
+    time.sleep(0.5)
+    print("A", end='')
+    time.sleep(0.5)
+    print("N", end='')
+    time.sleep(0.5)
+    print("G", end='')
+    time.sleep(0.5)
+    print("M", end='')
+    time.sleep(0.5)
+    print("A", end='')
+    time.sleep(0.5)
+    print("N", end='')
+    print("Let's play!!!")
+
+    while True:
+        gameChoice = input("Would You?\n").upper()
+        if gameChoice == "YES" or gameChoice == "Y":
+            break
+        elif gameChoice == "NO" or gameChoice == "N":
+            sys.exit("Exiting! Have a nice day")
+        else:
+            print("Please Answer only Yes or No")
+            continue
+newFunc()
+
+def print_scaffold(guess_taken): #prints the scaffold
+    if (guess_taken == 0):
+        print("Ah,nice save")
+        print ("_________")
+        print ("| |")
+        print ("|")
+        print ("|")
+        print ("|")
+        print ("|")
+        print ("|________")
+    elif (guess_taken == 1):
+        print("Oh no,look what you did.He's one step closer to death now :/")
+        print ("_________")
+        print ("|      |")
+        print ("|      O")
+        print ("|")
+        print ("|")
+        print ("|________")
+    elif (guess_taken == 2):
+        print("Okay, two steps closer :/")
+        print ("_________")
+        print ("|      |")
+        print ("|      O")
+        print ("|      |")
+        print ("|      |")
+        print ("|")
+        print ("|________")
+    elif (guess_taken == 3):
+        print("Woah woah, three steps closer. Damn. :/")
+        print ("_________")
+        print ("|       |")
+        print ("|       O")
+        print ("|      \|")
+        print ("|       |")
+        print ("|")
+        print ("|________")
+    elif (guess_taken == 4):
+        print("Alright, calm down there lil soldier. Four steps closer :/")
+        print ("_________")
+        print ("|       |")
+        print ("|       O")
+        print ("|      \|/")
+        print ("|       |")
+        print ("|")
+        print ("|________")
+    elif (guess_taken == 5):
+        print("Is he a joke to you? 5 steps closer :/")
+        print ("_________")
+        print ("|       |")
+        print ("|       O")
+        print ("|      \|/")
+        print ("|       |")
+        print ("|       / ")
+        print ("|________")
+    elif (guess_taken == 6):
+        print("I think you just killed him. It k. It be like that sometimes. :/")
+        print ("_________")
+        print ("|       |")
+        print ("|       O")
+        print ("|      \|/")
+        print ("|       |")
+        print ("|      / \ ")
+        print ("|________")
+        print ("\n")
+
+def change():
+    for character in secretWord:
+        guess_word.append("-")
+    print("Ok, so the word You need to guess has", length_word, "characters")
+    print("Be aware that You can enter only 1 letter from a-z\n\n")
+    print(guess_word)
+
+def guessing():
+    guess_taken = 1
+    while guess_taken < 7:
+        guess = input("Pick a letter lezzgoooo\n").lower()
+        if not guess in alphabet:
+            print("Enter a letter from a-z alphabet. Go ahead.")
+        elif guess in letter_storage:
+            print("Nah nah. Trust me you don't wanna go back there.You have already guessed that letter!")
+        else:
+            letter_storage.append(guess)
+            if guess in secretWord:
+                print("You guessed correctly! Nice.")
+                for x in range(0, length_word):
+                    if secretWord[x] == guess:
+                        guess_word[x] = guess
+                        print(guess_word)
+                    if not '-' in guess_word:
+                        sys.exit("You won woohoo! Maximum appreciation you'll ever get ha.")
+            else:
+                print("The letter is not in the word.Try again aw! ")
+                print_scaffold(guess_taken)
+                guess_taken +=1
+                if guess_taken == 7:
+                    print("Sorry Mate, you lost :<! HA")
+
+
+
+change()
+guessing()
+
+print("Game Over")
+
